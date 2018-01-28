@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Exercise 4 Web Storage</title>
+
+<link href="exercise4reset.css" type="text/css" rel="stylesheet" />
+
+<link href="exercise4.css" type="text/css" rel="stylesheet" />
+
+<img src="donutpic2.jpg" class="donutpic2" />
+
+<script>
+window.addEventListener("load",init);
+
+function init(){
+	if(typeof(Storage)!=="undefined"){
+	
+	display();
+	
+	var button=document.getElementById("button");
+	button.addEventListener("click",saveInfo);
+	}
+	
+	else{
+	//old bowser	
+	}
+}
+
+function saveInfo()
+    {
+	var type=document.getElementById("type").value;
+	var color=document.getElementById("color").value;
+	var comments=document.getElementById("comments").value;
+	var quantity=document.getElementById("quantity").value;
+    
+	localStorage.setItem("donutType",type);
+	localStorage.setItem("donutColor",color);
+    localStorage.setItem("donutComments",comments);
+	localStorage.setItem("donutQuantity",quantity);
+	
+	display();
+	
+    }
+
+function display()
+    {
+	var rightBox=document.getElementById("useroutput");
+	var theType=localStorage.getItem("donutType");
+	var theColor=localStorage.getItem("donutColor");
+    var theComments=localStorage.getItem("donutComments");
+	var theQuantity=localStorage.getItem("donutQuantity");
+	
+	if(theComments==undefined){
+		document.getElementById("useroutput").innerHTML="";
+	}
+	else{ document.getElementById("useroutput").innerHTML="OUTPUT  <hr /><br /><br />Donut Type: "+theType+"<br /><br />  Frosting Color: "+theColor+" <br /> <br /> Donut Extras: "+theComments+" <br /><br /> Quantity: "+theQuantity;
+         
+	}
+	
+}
+</script>
+
+</head>
+
+<body>
+
+<div id="main">
+	<section id="userinput">
+    INPUT <br>
+	<hr />
+    <br /><br />
+    <form>
+    
+    <div>Donut Type:<br /><input type="input" id="type" size="20"></div>
+    <br />
+    <div>Frosting Color: (pink, green, blue, or red) <br /> <input type="input" id="color" size="20"></div>
+    <br />
+    <div>Donut Extras: (sprinkles, extra frostring, or candy pieces)<br />
+    <textarea id="comments" rows="10"></textarea></div>
+    <br />
+    <div>Quantity:<br /><input type="input" id="quantity" size="20"></div>
+    <br />
+        
+    <div><input type="button" id="button" value="Save"></div>
+        
+    </form>
+    </section>
+    
+    <section id="useroutput">
+ OUTPUT  
+ 	<hr />
+    <br /><br />
+    </section>
+
+</div>
+
+
+
+</body>
+</html>
